@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.smallroutine.mapper.SignMapper">
+    <sql id="Base_Column_List">
+    _id as id, name, profession, phone, userId
+  </sql>
+    <insert id="insertSign" >
+        INSERT INTO sign (
+        name,
+        profession,
+        phone,
+        userId
+        )
+        VALUES (
+        #{name},
+        #{profession},
+        #{phone},
+        #{userId}
+        )
+    </insert>
+    <update id="updateByPrimaryKeySelective">
+        UPDATE sign
+        <set>
+            name = #{name},
+            profession = #{profession},
+            phone = #{phone},
+            userId = #{userId}
+        </set>
+        WHERE
+        _id = #{id}
+    </update>
+
+    <delete id="deleteByPrimaryKey">
+        DELETE FROM sign
+        WHERE _id = #{id}
+    </delete>
+    <select id="selectByPrimaryKey" resultType="com.example.smallroutine.dto.Sign">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM sign
+        WHERE _id = #{id}
+    </select>
+    <select id="selectByUserId" resultType="com.example.smallroutine.dto.Sign">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM sign
+        WHERE userId = #{userId}
+
+    </select>
+
+</mapper>
